@@ -17,7 +17,7 @@ namespace AttendanceService.Controllers
         }
 
         [HttpPost("checkin")]
-        public IActionResult CheckIn(CheckInRequest request)
+        public async Task<IActionResult> CheckIn(CheckInRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.EmployeeId))
                 return BadRequest("EmployeeId is required.");
@@ -25,7 +25,7 @@ namespace AttendanceService.Controllers
             if (string.IsNullOrWhiteSpace(request.EmployeeName))
                 return BadRequest("EmployeeName is required.");
 
-            var result = _service.CheckIn(request);
+            var result = await _service.CheckIn(request);
 
             return Ok(result);
         }
