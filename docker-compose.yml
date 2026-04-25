@@ -1,9 +1,30 @@
 version: '3.9'
 
 services:
+
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  attendance-api:
+    build:
+      context: .
+      dockerfile: src/AttendanceService/AttendanceService/Dockerfile
+    ports:
+      - "5001:8080"
+
+  notification-api:
+    build:
+      context: .
+      dockerfile: src/NotificationService/NotificationService/Dockerfile
+    ports:
+      - "5002:8080"
+
+  reporting-api:
+    build:
+      context: .
+      dockerfile: src/ReportingService/ReportingService/Dockerfile
+    ports:
+      - "5003:8080"
